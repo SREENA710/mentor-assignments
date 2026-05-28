@@ -42,20 +42,40 @@
 #         seen[num] = i
 #     return None
 
+
+# def two_sum(nums, target):
+#     seen = {}
+#     pairs = []
+
+#     for i, num in enumerate(nums):
+#         complement = target - num
+#         if complement in seen:
+#             pairs.append([complement, num]) 
+#         seen[num] = i
+
+#     return pairs if pairs else None
+
+
+# print(two_sum([2, 7, 11, 15], 9))       
+# print(two_sum([3, 2, 4], 6))           
+# print(two_sum([14, 4, 15, 0, -10], 4))  
+
+
 def two_sum(nums, target):
     seen = {}
     pairs = []
+    i = 0   
 
-    for i, num in enumerate(nums):
+    for num in nums:
         complement = target - num
         if complement in seen:
-            pairs.append([complement, num]) 
+            pairs.append([complement, num])
         seen[num] = i
+        i += 1
 
     return pairs if pairs else None
 
 
 print(two_sum([2, 7, 11, 15], 9))       
-print(two_sum([3, 2, 4], 6))           
+print(two_sum([3, 2, 4], 6))             
 print(two_sum([14, 4, 15, 0, -10], 4))  
-
