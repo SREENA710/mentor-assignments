@@ -62,18 +62,18 @@
 
 
 def two_sum(nums, target):
-    seen = {}
-    pairs = []
+    seen_numbers = {}
+    matched_pairs = []
     i = 0   
 
     for num in nums:
-        complement = target - num
-        if complement in seen:
-            pairs.append([complement, num])
-        seen[num] = i
+        result = target - num
+        if result in seen_numbers:
+            matched_pairs.append([result, num])
+        seen_numbers[num] = i
         i += 1
 
-    return pairs if pairs else None
+    return matched_pairs if matched_pairs else None
 
 
 print(two_sum([2, 7, 11, 15], 9))       
