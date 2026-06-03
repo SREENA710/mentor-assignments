@@ -20,11 +20,11 @@ r"^container=(\S+)\s+event=(\w+)\s+exit_code=(\d+)\s+reason=(\w+)\s+image=(\S+)$
 r"^git\s+user=(\w+)\s+action=(\w+)\s+branch=(\S+)\s+target=(\w+)\s+result=(\w+)\s+files=(\d+)$"
 
 
-# Write a regex to extract `ip`, `timestamp`, `method`, `path`, `status`, `bytes`, and `user_agent`.
-# 10.2.4.8 -- [20/May/2026:10:21:09 +0000] "POST /api/orders HTTP/1.1" 201 342 "curl/8.1"
-r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+--\s+"([A-Z]+)\s+(\S+)\s+"\s+(\d+)\s+(\d+)\s+"$'
+# Write a regex to extract `ip`, `timestamp`, `method`, `path`, `status`, `bytes`.
+# 10.2.4.8 -- [20/May/2026:10:21:09 +0000] "POST /api/orders HTTP/1.1" 201 342 
+r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+--\s+\[(\d{2}/[A-Z][a-z]{2}/\d{4}:\d{2}:\d{2}:\d{2}\s\+\d{4})\]\s+"([A-Z]+)\s+([/a-z]+)\s+[A-Z]+/[0-9.]+"\s+(\d+)\s+(\d+)$'
 
 
 # Write a regex to extract `timestamp`, `host`, `process`, `pid`, `attempted_user`, `source_ip`, and `source_port`.
 # May 20 10:45:12 app-prod sshd[9214]: Failed password for invalid user admin from 203.0.113.9 port 51422 ssh2
-r"^([A-Za-z]{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+(\S+)\s+$"
+r"^([A-Za-z]{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+([a-zA-Z0-9.-]+)\s+([a-zA-Z0-9_-]+)(?:\[(\d+)\])?:\s+Failed password for invalid user\s+([a-zA-Z0-9_-]+)\s+from\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+port\s+(\d+)\s+\S+$"
