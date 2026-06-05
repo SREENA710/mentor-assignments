@@ -1,8 +1,8 @@
 # Write a regex to extract `timestamp`, `level`, `user`, `endpoint`, `status`, and `latency_ms`
 # 2026-05-20 10:15:22 ERROR user=alice endpoint=/api/payments status=500 latency_ms=842
 
-r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\s+([A-Z]+)\s+([a-z]+)\s+([/A-Z]+)\s+(\d+)\s+(\d+)$"
-r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\s+([A-Z]+)\s+user=([a-z]+)\s+endpoint=([/A-Z]+)\s+status=(\d+)\s+latency_ms=(\d+)$"
+r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\s+([A-Z]+)\s+([a-z]+)\s+([/a-z]+)\s+(\d+)\s+(\d+)$"
+r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\s+([A-Z]+)\s+user=([a-z]+)\s+endpoint=([/\w]+)\s+status=(\d+)\s+latency_ms=(\d+)$"
 
 
 # Write a regex to extract `level`, `process`, `pid`, `queue`, `retry`, and `message`.
@@ -12,12 +12,12 @@ r"^([A-Z]+)\s+([a-z-]+)\s+pid=(\d+)\s+queue=([a-z]+)\s+retry=(\d+)\s+message=\"(
 
 # Write a regex to extract `container`, `event`, `exit_code`, `reason`, and `image`.
 # container=api-server event=die exit_code=137 reason=OOMKilled image=client-api:2026.05.20
-r"^container=(\S+)\s+event=(\w+)\s+exit_code=(\d+)\s+reason=(\w+)\s+image=(\S+)$"
+r"^container=([a-z-]+)\s+event=(\w+)\s+exit_code=(\d+)\s+reason=(\w+)\s+image=([\w-]+:\d{4}\.\d{2}\.\d{2})$"
 
 
 # Write a regex to extract `user`, `action`, `branch`, `target`, `result`, and `files`.
 # git user=riya action=merge branch=feature/login target=main result=conflict files=3
-r"^git\s+user=(\w+)\s+action=(\w+)\s+branch=(\S+)\s+target=(\w+)\s+result=(\w+)\s+files=(\d+)$"
+r"^git\s+user=(\w+)\s+action=(\w+)\s+branch=([\w]+/[\w]+)\s+target=(\w+)\s+result=(\w+)\s+files=(\d+)$"
 
 
 # Write a regex to extract `ip`, `timestamp`, `method`, `path`, `status`, `bytes`.
