@@ -75,3 +75,84 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# A CPU-heavy transformation freezes the application. How would you move this work to multiprocessing?
+# def transform(record):
+# # CPU-heavy calculation
+# return record * record
+# records = list(range(10_000_000))
+import multiprocessing
+import time
+
+def transform(record):
+    return record * record
+
+if __name__ == "__main__":
+    records = list(range(10_000_000))
+
+    start = time.time()
+
+    with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
+        results = pool.map(transform, records)
+
+    end = time.time()
+    print(f"Processed {len(records)} records in {end - start:.2f} seconds")
+
+
+
+# Multiple functions need the same audit behavior: log function name, start time, end time, execution duration, and exceptions.How 
+# would you implement this using a decorator?
+# def generate_report(user_id):
+# # expensive report logic
+# return {"status": "done"}
+import logging
+import time
+from functools import wraps
+
+# Configure logging once
+logging.basicConfig(
+    filename="audit.log",
+    level=logging.INFO,
+)
+
+def audit(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        try:
+            result = func(*args, **kwargs)
+            return result
+        except Exception as e:
+            logging.error("Exception in %s: %s", func.__name__, e)
+            raise
+        finally:
+            end_time = time.time()
+            duration = end_time - start_time
+    return wrapper
+
+
+
+# A Python script uses `print()` everywhere, and the client wants logs written to a file with timestamps and error details. Howwould 
+# you improve this?
+# def process_payment(payment_id):
+# print("Processing payment", payment_id)
+# result = call_gateway(payment_id)
+# print("Gateway response", result)
+# return resul
+import logging
+
+logging.basicConfig(
+    filename="payments.log",          
+    level=logging.INFO,               
+)
+
+def process_payment(payment_id):
+    logging.info("Processing payment:", payment_id)
+    try:
+        result = call_gateway(payment_id)
+        logging.info("Gateway response:", result)
+        return result
+    except Exception as e:
+        logging.error("Error processing payment %s: %s", payment_id, e)
+        return None
